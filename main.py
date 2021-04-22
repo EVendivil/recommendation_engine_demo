@@ -21,7 +21,9 @@ def home():
 # @app.route("/upload_image", methods=['GET'])
 # def 
 
-def weighted_rating(x, m=m, C=C):
+def weighted_rating(x,):
+	C = 5.618207215133889
+	m = 160.0
     v = x['vote_count']
     R = x['vote_average']
     return (v/(v+m) * R) + (m/(m+v) * C)
