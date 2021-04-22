@@ -66,9 +66,16 @@ def create_soup(x):
     return ' '.join(x['keywords']) + ' ' + ' '.join(x['cast']) + ' ' + x['director'] + ' ' + ' '.join(x['genres'])
 
 def compute_cosine_matrix():
-	metadata = pd.read_csv('movie_data/movies_metadata.csv', low_memory=False)
-	credits = pd.read_csv('movie_data/credits.csv')
-	keywords = pd.read_csv('movie_data/keywords.csv')
+	metadata = pd.read_csv('data/movies_metadata.csv', low_memory=False)
+	keywords = pd.read_csv('data/keywords.csv')
+
+	credits_1 = pd.read_csv('data/credits_1.csv')
+	credits_2 = pd.read_csv('data/credits_2.csv')
+	credits = pd.concat([credits_1, credits_2])
+
+	credits = credits.reset_index()
+	del credits['Unnamed: 0']
+	del credits['index']
 
 	C = metadata['vote_average'].mean()
 	m = metada['vote_count'].quantile(0.90)
