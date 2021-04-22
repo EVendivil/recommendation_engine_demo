@@ -24,9 +24,9 @@ def home():
 def weighted_rating(x,):
 	C = 5.618207215133889
 	m = 160.0
-    v = x['vote_count']
-    R = x['vote_average']
-    return (v/(v+m) * R) + (m/(m+v) * C)
+	v = x['vote_count']
+	R = x['vote_average']
+	return (v/(v+m) * R) + (m/(m+v) * C)
 
 def get_recommendations(title, cosine_sim):
     idx = indices[title]
