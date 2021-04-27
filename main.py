@@ -68,13 +68,13 @@ def create_soup(x):
 def compute_cosine_matrix():
 	metadata = pd.read_csv('data/movies_metadata.csv', low_memory=False)
 	keywords = pd.read_csv('data/keywords.csv')
-
+	# credits = pd.read_csv('data/credits.csv')
 	credits_1 = pd.read_csv('data/credits_1.csv')
 	credits_2 = pd.read_csv('data/credits_2.csv')
-	credits = pd.concat([credits_1, credits_2])
+	credits_3 = pd.read_csv('data/credits_3.csv')
+	credits = pd.concat([credits_1, credits_2, credits_3])
 
 	credits = credits.reset_index()
-	del credits['Unnamed: 0']
 	del credits['index']
 
 	C = metadata['vote_average'].mean()
@@ -122,5 +122,5 @@ def compute_cosine_matrix():
 
 
 if __name__ == "__main__":
-	# app.run(debug=True)
+	app.run(debug=True)
 	app.run(debug=True, host='0.0.0.0', port=80)
