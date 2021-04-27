@@ -78,7 +78,7 @@ def compute_cosine_matrix():
 	del credits['index']
 
 	C = metadata['vote_average'].mean()
-	m = metada['vote_count'].quantile(0.90)
+	m = metadata['vote_count'].quantile(0.90)
 
 	q_movies = metadata.copy().loc[metadata['vote_count'] >= m]
 	q_movies['score'] = q_movies.apply(weighted_rating, axis=1)
