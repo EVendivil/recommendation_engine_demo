@@ -35,6 +35,7 @@ def get_recommendations(title, cosine_sim):
 
 def compute_cosine_matrix():
 	# metadata_cleaned = pd.read_csv('data/metadata_cleaned.csv')
+	print('i am here')
 	metadata_cleaned_1 = pd.read_csv('data/metadata_cleaned_1.csv')
 	metadata_cleaned_2 = pd.read_csv('data/metadata_cleaned_2.csv')
 	metadata_cleaned = pd.concat([metadata_cleaned_1, metadata_cleaned_2])
@@ -46,6 +47,7 @@ def compute_cosine_matrix():
 	indices = pd.Series(metadata_cleaned.index, index=metadata_cleaned['title']).drop_duplicates()
 	count = CountVectorizer(stop_words='english')
 	count_matrix = count.fit_transform(metadata_cleaned['soup'])
+	print('Will compute')
 	cosine_sim2 = cosine_similarity(count_matrix, count_matrix)
 	metadata_cleaned = metadata_cleaned.reset_index()
 	indices = pd.Series(metadata_cleaned.index, index=metadata_cleaned['title'])
