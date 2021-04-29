@@ -41,6 +41,11 @@ def get_recommendations(title):
 	return metadata_cleaned['title'].iloc[movie_indices].to_list()
 
 def compute_cosine_matrix():
+
+	global cosine_sim
+	global names
+	global metadata_cleaned
+	
 	# metadata_cleaned = pd.read_csv('data/metadata_cleaned.csv')
 	metadata_cleaned_1 = pd.read_csv('data/metadata_cleaned_1.csv')
 	metadata_cleaned_2 = pd.read_csv('data/metadata_cleaned_2.csv')
@@ -48,9 +53,6 @@ def compute_cosine_matrix():
 	metadata_cleaned = metadata_cleaned.reset_index()
 	del metadata_cleaned['Unnamed: 0']
 	del metadata_cleaned['index']
-
-	global cosine_sim
-	global names
 
 	count = CountVectorizer(stop_words='english')
 	count_matrix = count.fit_transform(metadata_cleaned['soup'])
