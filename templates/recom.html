@@ -73,14 +73,16 @@
 </head>
 <body>
 	<h1>Movies Recommendation Engine</h1>
-	<div class="wrap">
-	   <div class="search">
-	      <input type="text" class="searchTerm", placeholder="Enter movie">
-	      <button type="submit" class="searchButton">
-	        <i class="fa fa-search"></i>
-	     </button>
-	   </div>
-	</div>
+	<form action="/recommend" method="POST">
+		<div class="wrap">
+		   <div class="search">
+		    	<input type="text" name="movie_title", class="searchTerm", placeholder="Enter movie">
+				<button type="submit" class="searchButton">
+					<i class="fa fa-search"></i>
+				</button>
+		   </div>
+		</div>
+	</form>
 
 	<div class='movie-recom'>
 		{% for item in data %}
