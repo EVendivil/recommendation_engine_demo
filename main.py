@@ -13,9 +13,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 app = Flask(__name__)
 api = Api(app)
 
-cosine_sim = ""
-names = ""
-
 @app.route("/")
 def home():
 	print("im home")
@@ -33,15 +30,15 @@ def get_movie_recom():
 	return render_template("recom.html", data=recomm_movies)
 
 def get_recommendations(title):
-    idx = names[names.str.lower().str.contains(title.lower(), na=False)].index[0]
-    sim_scores = list(enumerate(cosine_sim[idx]))
+	idx = names[names.str.lower().str.contains(title.lower(), na=False)].index[0]
+	sim_scores = list(enumerate(cosine_sim[idx]))
 
-    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-    sim_scores = sim_scores[1:11]
+	sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+	sim_scores = sim_scores[1:11]
 
-    movie_indices = [i[0] for i in sim_scores]
+	movie_indices = [i[0] for i in sim_scores]
 
-    return metadata_cleaned['title'].iloc[movie_indices].to_list()
+	return metadata_cleaned['title'].iloc[movie_indices].to_list()
 
 def compute_cosine_matrix():
 	# metadata_cleaned = pd.read_csv('data/metadata_cleaned.csv')
@@ -52,14 +49,14 @@ def compute_cosine_matrix():
 	del metadata_cleaned['Unnamed: 0']
 	del metadata_cleaned['index']
 
+	global cosine_sim
+	global names
 
-	# indices = pd.Series(metadata_cleaned.index, index=metadata_cleaned['title']).drop_duplicates()
 	count = CountVectorizer(stop_words='english')
 	count_matrix = count.fit_transform(metadata_cleaned['soup'])
 	cosine_sim = cosine_similarity(count_matrix, count_matrix)
 	metadata_cleaned = metadata_cleaned.reset_index()
 	names = pd.Series(metadata_cleaned['title'],metadata_cleaned.index).drop_duplicates()
-	# print(get_recommendations('Toy Story', cosine_sim))
 
 if __name__ == "__main__":
 	# app.run(debug=True)
