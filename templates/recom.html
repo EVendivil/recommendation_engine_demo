@@ -19,10 +19,6 @@
 		  font-size: 60px;
 		} 
 
-		p{
-			margin-top: 5%;
-		}
-
 		.search {
 		  width: 100%;
 		  position: relative;
@@ -64,22 +60,32 @@
 		  top: 50%;
 		  left: 50%;
 		  transform: translate(-50%, -50%);
-		  display:inline-block;
 		}
+
+		.movie-recom{
+			text-align: center;
+			/*margin-left: 5%;*/
+			margin-top: 10%;
+		}
+
 
 	</style>
 </head>
 <body>
 	<h1>Movies Recommendation Engine</h1>
-	<form action="/recommend" method="POST">
-		<div class="wrap">
-		   <div class="search">
-		    	<input type="text" name="movie_title", class="searchTerm", placeholder="Enter movie">
-				<button type="submit" class="searchButton">
-					<i class="fa fa-search"></i>
-				</button>
-		   </div>
-		</div>
-	</form>
+	<div class="wrap">
+	   <div class="search">
+	      <input type="text" class="searchTerm", placeholder="Enter movie">
+	      <button type="submit" class="searchButton">
+	        <i class="fa fa-search"></i>
+	     </button>
+	   </div>
+	</div>
+
+	<div class='movie-recom'>
+		{% for item in data %}
+		    <p> {{ item }} </p>
+		{% endfor %}
+	</div>
 </body>
 </html>
